@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Дмитрий Фиалковский — художник-постановщик</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root{
+  --bg-dark: #15181a;
+  --bg-dark-2: #1b1f22;
+  --paper: #e7e1d3;
+  --paper-2: #ddd6c4;
+  --ink: #201c16;
+  --ink-soft: #4a453b;
+  --offwhite: #ece6d8;
+  --amber: #d98a2b;
+  --chalk: #7c93a0;
+  --rule: rgba(32,28,22,0.18);
+  --rule-dark: rgba(236,230,216,0.16);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Work Sans', Arial, sans-serif;
+  line-height:1.55;
+}
+::selection{ background:var(--amber); color:var(--bg-dark); }
+
+h1,h2,h3, .display{
+  font-family:'Oswald', 'Arial Narrow', sans-serif;
+  text-transform:none;
+  letter-spacing:0.01em;
+  font-weight:500;
+  margin:0;
+}
+
+a{ color:inherit; }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+
+/* ---------- scene tag ---------- */
+#scene-tag{
+  position:fixed;
+  top:22px; left:22px;
+  z-index:50;
+  font-family:'Oswald', sans-serif;
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--offwhite);
+  mix-blend-mode:difference;
+  padding:6px 10px;
+  border:1px solid rgba(236,230,216,0.5);
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+@media (max-width:640px){ #scene-tag{ display:none; } }
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  min-height:100vh;
+  background:var(--bg-dark);
+  color:var(--offwhite);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  overflow:hidden;
+  padding:32px clamp(20px,6vw,64px) 40px;
+}
+.hero-plan{
+  position:absolute;
+  inset:0;
+  width:100%; height:100%;
+  opacity:0.55;
+}
+.hero-top{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  letter-spacing:0.16em;
+  color:var(--chalk);
+  z-index:2;
+}
+.hero-row{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(24px,5vw,64px);
+  flex:1;
+  padding:28px 0;
+}
+.hero-mid{ flex:1 1 420px; min-width:0; }
+.hero-photo{
+  flex:0 1 320px;
+  max-width:340px;
+  width:100%;
+  position:relative;
+  align-self:center;
+}
+.hero-photo img{
+  width:100%;
+  display:block;
+  filter:grayscale(1) contrast(1.06);
+  border:1px solid var(--rule-dark);
+}
+.hero-photo::before, .hero-photo::after{
+  content:"";
+  position:absolute;
+  width:14px; height:14px;
+  border-color:var(--amber);
+  border-style:solid;
+}
+.hero-photo::before{ top:-7px; left:-7px; border-width:1.5px 0 0 1.5px; }
+.hero-photo::after{ bottom:-7px; right:-7px; border-width:0 1.5px 1.5px 0; }
+@media (max-width:760px){
+  .hero-row{ flex-direction:column-reverse; align-items:flex-start; gap:32px; }
+  .hero-photo{ max-width:230px; align-self:flex-start; }
+}
+.hero-name{
+  font-size:clamp(48px, 10vw, 118px);
+  line-height:0.95;
+  font-weight:600;
+  color:var(--offwhite);
+}
+.hero-role{
+  margin-top:18px;
+  font-family:'Work Sans', sans-serif;
+  font-size:clamp(18px,2.4vw,26px);
+  letter-spacing:0.02em;
+  color:var(--chalk);
+}
+.hero-bottom{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px 40px;
+  justify-content:space-between;
+  align-items:flex-end;
+  border-top:1px solid var(--rule-dark);
+  padding-top:18px;
+  font-size:13px;
+}
+.hero-bottom a{ text-decoration:none; border-bottom:1px solid rgba(236,230,216,0.35); padding-bottom:2px; }
+.hero-bottom a:hover{ border-color: var(--amber); color:var(--amber); }
+
+/* ---------- shared section frame ---------- */
+section{ padding: 96px clamp(20px,7vw,88px); }
+.section-inner{ max-width:900px; margin:0 auto; }
+.section-head{
+  display:grid;
+  grid-template-columns: 1fr;
+  gap:6px;
+  margin-bottom:52px;
+}
+.section-num{
+  font-family:'Oswald',sans-serif;
+  font-size:12px;
+  letter-spacing:0.18em;
+  color:var(--amber);
+}
+.section-title{
+  font-size:clamp(28px,4vw,42px);
+  font-weight:500;
+  color:var(--ink);
+}
+
+/* ---------- about ---------- */
+.about{ background:var(--paper); }
+.about blockquote{
+  margin:0;
+  font-size:clamp(20px,2.6vw,28px);
+  font-style:italic;
+  line-height:1.5;
+  max-width:32ch;
+  border-left:2px solid var(--amber);
+  padding-left:28px;
+}
+.about blockquote span{ display:block; font-style:normal; font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:0.14em; color:var(--ink-soft); margin-top:18px; }
+
+/* ---------- credit entries (drafting-mark frame) ---------- */
+.credit{
+  position:relative;
+  padding:20px 22px 22px 0;
+  border-bottom:1px solid var(--rule);
+  display:grid;
+  grid-template-columns: 96px 1fr;
+  gap:18px;
+  align-items:baseline;
+}
+.credit:last-child{ border-bottom:none; }
+.credit-year{
+  font-family:'Oswald',sans-serif;
+  font-size:14px;
+  color:var(--ink-soft);
+  letter-spacing:0.04em;
+}
+.credit-title{
+  font-family:'Oswald',sans-serif;
+  font-weight:500;
+  font-size:19px;
+  color:var(--ink);
+}
+.credit-title .tag{
+  font-family:'Work Sans', sans-serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:15px;
+  color:var(--ink-soft);
+}
+.credit-meta{
+  margin-top:5px;
+  font-size:14.5px;
+  color:var(--ink-soft);
+}
+@media (max-width:560px){
+  .credit{ grid-template-columns:1fr; gap:4px; }
+  .credit-year{ order:2; }
+}
+
+/* corner marks on hover / focus, referencing drafting alignment marks */
+.credit::before, .credit::after{
+  content:"";
+  position:absolute;
+  width:9px; height:9px;
+  border-color:var(--amber);
+  border-style:solid;
+  border-width:0;
+  opacity:0;
+  transition:opacity 0.15s ease;
+}
+.credit::before{ top:12px; right:0; border-top-width:1.5px; border-right-width:1.5px; }
+.credit::after{ bottom:12px; right:0; border-bottom-width:1.5px; border-right-width:1.5px; }
+.credit:hover::before, .credit:hover::after{ opacity:1; }
+
+/* ---------- theatre ---------- */
+.theatre{ background:var(--paper-2); }
+.theatre-block{
+  display:grid;
+  grid-template-columns: 180px 1fr;
+  gap:28px;
+}
+.theatre-org{
+  font-family:'Oswald',sans-serif;
+  font-size:15px;
+  color:var(--ink-soft);
+  line-height:1.4;
+}
+.theatre-org .years{ display:block; color:var(--amber); margin-bottom:6px; font-size:13px; letter-spacing:0.06em; }
+.role-path{ display:flex; flex-direction:column; gap:14px; }
+.role-step{
+  display:flex; align-items:baseline; gap:14px;
+  padding-bottom:14px;
+  border-bottom:1px dashed var(--rule);
+}
+.role-step:last-child{ border-bottom:none; padding-bottom:0; }
+.role-step .dot{
+  width:6px; height:6px; border-radius:50%;
+  background:var(--amber); flex:none; margin-top:7px;
+}
+.role-step .role-name{ font-family:'Oswald',sans-serif; font-size:17px; color:var(--ink); }
+@media (max-width:560px){ .theatre-block{ grid-template-columns:1fr; } }
+
+/* ---------- advertising: brand wall ---------- */
+.ad{ background:var(--paper); }
+.brand-wall{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:0;
+  border-top:1px solid var(--rule);
+  border-left:1px solid var(--rule);
+}
+.brand{
+  padding:16px 20px;
+  border-right:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  font-family:'Oswald',sans-serif;
+  font-size:14px;
+  letter-spacing:0.03em;
+  color:var(--ink-soft);
+  min-width:0;
+  overflow-wrap:anywhere;
+  transition:color 0.15s ease, background 0.15s ease;
+}
+.brand:hover{ color:var(--ink); background:rgba(217,138,43,0.12); }
+@media (max-width:700px){ .brand-wall{ grid-template-columns:repeat(2, minmax(0, 1fr)); } }
+@media (max-width:440px){ .brand-wall{ grid-template-columns:1fr; } }
+.ad-note{ margin-top:22px; font-size:14px; color:var(--ink-soft); }
+
+/* ---------- contemporary art: timeline ---------- */
+.art{ background:var(--paper-2); }
+.art-year{
+  display:grid;
+  grid-template-columns: 70px 1fr;
+  gap:24px;
+  padding:22px 0;
+  border-bottom:1px solid var(--rule);
+}
+.art-year:last-child{ border-bottom:none; }
+.art-year .yr{ font-family:'Oswald',sans-serif; font-size:20px; color:var(--amber); }
+.art-year ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; }
+.art-year li{ font-size:15px; }
+.art-year li.headline{ font-family:'Oswald',sans-serif; font-size:17px; color:var(--ink); }
+
+/* ---------- education ---------- */
+.edu{ background:var(--paper); }
+.edu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+.edu-item .years{ font-family:'Oswald',sans-serif; font-size:13px; letter-spacing:0.06em; color:var(--amber); }
+.edu-item .school{ margin-top:8px; font-family:'Oswald',sans-serif; font-size:19px; color:var(--ink); }
+@media (max-width:560px){ .edu-grid{ grid-template-columns:1fr; gap:28px; } }
+
+/* ---------- footer / contact ---------- */
+.contact{
+  background:var(--bg-dark);
+  color:var(--offwhite);
+  padding:96px clamp(20px,7vw,88px) 48px;
+}
+.contact .section-inner{ text-align:left; }
+.contact-headline{
+  font-size:clamp(30px,5vw,52px);
+  max-width:14ch;
+  color:var(--offwhite);
+  margin-bottom:40px;
+}
+.contact-links{ display:flex; flex-wrap:wrap; gap:36px; margin-bottom:64px; }
+.contact-links a{
+  font-family:'Oswald',sans-serif;
+  font-size:clamp(18px,2.4vw,24px);
+  text-decoration:none;
+  border-bottom:1px solid rgba(236,230,216,0.35);
+  padding-bottom:4px;
+}
+.contact-links a:hover{ color:var(--amber); border-color:var(--amber); }
+.foot-row{
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-top:1px solid var(--rule-dark);
+  padding-top:20px;
+  font-size:12px;
+  letter-spacing:0.08em;
+  color:var(--chalk);
+}
+</style>
+</head>
+<body>
+
+<div id="scene-tag">СЦЕНА 01 — ГЛАВНАЯ</div>
+
+<header class="hero" id="hero">
+  <svg class="hero-plan" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#7c93a0" stroke-width="1">
+      <rect x="120" y="120" width="960" height="560" opacity="0.35"/>
+      <line x1="120" y1="400" x2="1080" y2="400" stroke-dasharray="2 10" opacity="0.3"/>
+      <line x1="600" y1="120" x2="600" y2="680" stroke-dasharray="2 10" opacity="0.3"/>
+      <rect x="200" y="200" width="180" height="90" opacity="0.5"/>
+      <rect x="820" y="470" width="160" height="140" opacity="0.5"/>
+      <circle cx="600" cy="400" r="70" opacity="0.4"/>
+      <circle cx="600" cy="400" r="4" fill="#7c93a0" stroke="none" opacity="0.6"/>
+      <path d="M200 620 L 340 560 L 480 620" opacity="0.4"/>
+      <rect x="860" y="180" width="120" height="60" opacity="0.5"/>
+    </g>
+    <g fill="none" stroke="#d98a2b" stroke-width="1.2">
+      <line x1="600" y1="330" x2="600" y2="470" opacity="0.5"/>
+      <line x1="530" y1="400" x2="670" y2="400" opacity="0.5"/>
+    </g>
+  </svg>
+
+  <div class="hero-top">
+    <span>ХУДОЖНИК-ПОСТАНОВЩИК</span>
+    <span>МОСКВА</span>
+  </div>
+
+  <div class="hero-row">
+    <div class="hero-mid">
+      <h1 class="hero-name">Дмитрий<br>Фиалковский</h1>
+      <p class="hero-role">Кино • Театр • Реклама • Искусство</p>
+    </div>
+    <div class="hero-photo">
+      <img src="fialkovskiy-portrait.jpg" alt="Дмитрий Фиалковский">
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <a href="mailto:dfialkovskiy@gmail.com">dfialkovskiy@gmail.com</a>
+    <a href="tel:+79671207939">+7 967 120 79 39</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="about" id="about" data-scene="ОБО МНЕ">
+    <div class="section-inner">
+      <blockquote>
+        Художник-постановщик, работаю над проектами в кино, рекламе и фешн с 2012 года. Помимо съёмок участвую в проектах в поле современного искусства.
+        <span>ДМИТРИЙ ФИАЛКОВСКИЙ</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="film" data-scene="КИНО" style="background:var(--paper);">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-num">01 — ФИЛЬМОГРАФИЯ</span>
+        <h2 class="section-title">Кино</h2>
+      </div>
+
+      <div class="credit">
+        <div class="credit-year">2027</div>
+        <div>
+          <div class="credit-title">«Участковые из Сити»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2027</div>
+        <div>
+          <div class="credit-title">«Жил-был пёс»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2027</div>
+        <div>
+          <div class="credit-title">«Горнолыжка»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2026</div>
+        <div>
+          <div class="credit-title">«Город гномов»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2026</div>
+        <div>
+          <div class="credit-title">«Малой»</div>
+          <div class="credit-meta">реж. И. Макаревич · «123 продакшн»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2024—25</div>
+        <div>
+          <div class="credit-title">«Кибердеревня». Второй сезон</div>
+          <div class="credit-meta">реж. С. Васильев · кинокомпания «Место Силы»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2024</div>
+        <div>
+          <div class="credit-title">«Белая комната» <span class="tag">пилот</span></div>
+          <div class="credit-meta">реж. К. Майер · кинокомпания «Место Силы»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2024</div>
+        <div>
+          <div class="credit-title">«Против всех»</div>
+          <div class="credit-meta">реж. А. Татаренко · кинокомпания «Старт»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2024</div>
+        <div>
+          <div class="credit-title">«Кибертакси»</div>
+          <div class="credit-meta">реж. Байбулат Батуллин · кинокомпания «Место Силы»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2024</div>
+        <div>
+          <div class="credit-title">«Сводишь с ума»</div>
+          <div class="credit-meta">реж. Дарья Лебедева · «Форза фильм»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2021</div>
+        <div>
+          <div class="credit-title">«Birchpunk» <span class="tag">YouTube-сериал</span></div>
+          <div class="credit-meta">реж. С. Васильев · кинокомпания «Место Силы»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2021</div>
+        <div>
+          <div class="credit-title">«ЖЫЫЫЗНЬ» <span class="tag">пилот</span></div>
+          <div class="credit-meta">реж. Э. Никогосян · кинокомпания «123»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2020</div>
+        <div>
+          <div class="credit-title">«8 комнат»</div>
+          <div class="credit-meta">реж. Е. Сова · кинокомпания SovaFM</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2019</div>
+        <div>
+          <div class="credit-title">«Лёд 2»</div>
+          <div class="credit-meta">реж. Ж. Крыжовников · кинокомпания «Водород»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2014</div>
+        <div>
+          <div class="credit-title">«Залиния»</div>
+          <div class="credit-meta">реж. В. Дубровицкий · кинокомпания «Визориум»</div>
+        </div>
+      </div>
+      <div class="credit">
+        <div class="credit-year">2013</div>
+        <div>
+          <div class="credit-title">«Закон каменных джунглей»</div>
+          <div class="credit-meta">реж. И. Хомский · ТНТ production</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="theatre" id="theatre" data-scene="ТЕАТР">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-num">02 — СЦЕНА</span>
+        <h2 class="section-title">Театр</h2>
+      </div>
+      <div class="theatre-block">
+        <div class="theatre-org">
+          <span class="years">2014—2019</span>
+          Большой Академический Театр России
+        </div>
+        <div class="role-path">
+          <div class="role-step"><span class="dot"></span><span class="role-name">Художник-технолог сцены</span></div>
+          <div class="role-step"><span class="dot"></span><span class="role-name">Ассистент художника-постановщика</span></div>
+          <div class="role-step"><span class="dot"></span><span class="role-name">Художник-постановщик</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ad" id="ad" data-scene="РЕКЛАМА">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-num">03 — РЕКЛАМНЫЕ СЪЁМКИ</span>
+        <h2 class="section-title">Реклама и фешн</h2>
+      </div>
+      <div class="brand-wall">
+        <div class="brand">ЦУМ</div>
+        <div class="brand">Vogue Russia</div>
+        <div class="brand">Cosmopolitan</div>
+        <div class="brand">Elle</div>
+        <div class="brand">Bosco</div>
+        <div class="brand">Rich</div>
+        <div class="brand">Apple</div>
+        <div class="brand">Сбербанк</div>
+        <div class="brand">Альфа-Банк</div>
+        <div class="brand">Эконика</div>
+        <div class="brand">Barvikha Luxury Village</div>
+        <div class="brand">Ascona</div>
+        <div class="brand">Tele2</div>
+        <div class="brand">Яндекс</div>
+        <div class="brand">1811</div>
+        <div class="brand">Kidding Studio</div>
+        <div class="brand">Сбер Сити</div>
+        <div class="brand">Leah</div>
+        <div class="brand">Giardino Magico</div>
+        <div class="brand">Condé Nast</div>
+        <div class="brand">Алроса</div>
+      </div>
+      <p class="ad-note">Съёмки для брендов — с 2016 года.</p>
+    </div>
+  </section>
+
+  <section class="art" id="art" data-scene="СОВРЕМЕННОЕ ИСКУССТВО">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-num">04 — ПРАКТИКА</span>
+        <h2 class="section-title">Современное искусство</h2>
+      </div>
+
+      <div class="art-year">
+        <div class="yr">2018</div>
+        <ul>
+          <li class="headline">«Time to be an artist» — персональная выставка, галерея «Центр Красный»</li>
+          <li>Лаборатория на «Хитровке»</li>
+          <li>Фестиваль драматургии «Любимовка»</li>
+          <li>ЦТИ «Винзавод»</li>
+        </ul>
+      </div>
+      <div class="art-year">
+        <div class="yr">2017</div>
+        <ul>
+          <li>Фестиваль «Любимовка»</li>
+          <li>Галерея «Центр Красный»</li>
+          <li>Галерея «А3»</li>
+          <li>ЦТИ «Фабрика»</li>
+        </ul>
+      </div>
+      <div class="art-year">
+        <div class="yr">2016</div>
+        <ul>
+          <li class="headline">Параллельная и стратегическая программы Московской молодёжной биеннале</li>
+          <li>Фестиваль «Форма»</li>
+          <li>Театр «Трансформатор»</li>
+          <li>Фестиваль драматургии «Любимовка»</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="edu" id="edu" data-scene="ОБРАЗОВАНИЕ">
+    <div class="section-inner">
+      <div class="section-head">
+        <span class="section-num">05 — ОБРАЗОВАНИЕ</span>
+        <h2 class="section-title">Образование</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-item">
+          <div class="years">2007—2012</div>
+          <div class="school">Школа-студия МХАТ</div>
+        </div>
+        <div class="edu-item">
+          <div class="years">2014—2017</div>
+          <div class="school">Институт современного искусства «База»</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="contact" id="contact" data-scene="КОНТАКТЫ">
+  <div class="section-inner">
+    <h2 class="contact-headline">Обсудим проект</h2>
+    <div class="contact-links">
+      <a href="mailto:dfialkovskiy@gmail.com">dfialkovskiy@gmail.com</a>
+      <a href="tel:+79671207939">+7 967 120 79 39</a>
+    </div>
+    <div class="foot-row">
+      <span>ДМИТРИЙ ФИАЛКОВСКИЙ</span>
+      <span>ХУДОЖНИК-ПОСТАНОВЩИК</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const tag = document.getElementById('scene-tag');
+  const sections = document.querySelectorAll('[data-scene]');
+  let counter = { 'ОБО МНЕ':0, 'КИНО':1, 'ТЕАТР':2, 'РЕКЛАМА':3, 'СОВРЕМЕННОЕ ИСКУССТВО':4, 'ОБРАЗОВАНИЕ':5, 'КОНТАКТЫ':6 };
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const name = e.target.dataset.scene;
+        const num = String((counter[name] ?? 0) + 2).padStart(2,'0');
+        tag.textContent = 'СЦЕНА ' + num + ' — ' + name;
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  sections.forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>
